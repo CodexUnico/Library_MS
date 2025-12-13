@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users - Library Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">📚 SmartLibrary</div>
+            <div class="tagline">Users Management</div>
+        </header>
+
+        <nav class="nav-strip">
+            <div class="nav-buttons">
+                <a href="index.html" class="nav-btn">🏠 Home</a>
+                <a href="books.html" class="nav-btn">📖 Books</a>
+                <a href="borrowings.html" class="nav-btn">📋 Borrowings</a>
+                <a href="fines.html" class="nav-btn">💰 Fines</a>
+            </div>
+        </nav>
+
+        <div class="card">
+            <div class="page-header">
+                <h2>👥 Users Directory</h2>
+                <button class="add-btn" id="openAddUserModal">+ Add New User</button>
+            </div>
+
+            <input type="text" class="search-bar" placeholder="Search users by name, email, or phone...">
+
+            <div class="table-container">
+                <table class="users-table">
+                    <thead>
+                        <tr>
+                            <th>User ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Address</th>
+                            <th>Registration Date</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="usersTableBody">
+                        
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Add User Modal -->
+    <div id="addUserModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeAddUserModal">&times;</span>
+            <h2>Add New User</h2>
+            <form id="addUserForm" class="modal-form">
+                <div class="form-group">
+                    <label for="userId">User ID *</label>
+                    <input type="text" id="userId" name="userId" required placeholder="e.g., U005">
+                </div>
+
+                <div class="form-group">
+                    <label for="userName">Full Name *</label>
+                    <input type="text" id="userName" name="userName" required placeholder="Enter full name">
+                </div>
+
+                <div class="form-group">
+                    <label for="userEmail">Email *</label>
+                    <input type="email" id="userEmail" name="userEmail" required placeholder="user@example.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="userPhone">Phone Number *</label>
+                    <input type="tel" id="userPhone" name="userPhone" required placeholder="555-0105">
+                </div>
+
+                <div class="form-group">
+                    <label for="userAddress">Address *</label>
+                    <textarea id="userAddress" name="userAddress" rows="3" required placeholder="Enter complete address"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="registrationDate">Registration Date *</label>
+                    <input type="date" id="registrationDate" name="registrationDate" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="userStatus">Status *</label>
+                    <select id="userStatus" name="userStatus" required>
+                        <option value="">Select status</option>
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                        <option value="suspended">Suspended</option>
+                    </select>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="submit-btn">Add User</button>
+                    <button type="button" class="cancel-btn" id="cancelAddUser">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

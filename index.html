@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    
+    <title>Library Management System</title>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">📚 SmartLibrary</div>
+            <div class="tagline">Your Digital Library Management Solution</div>
+        </header>
+
+        <nav class="nav-strip">
+            <div class="nav-buttons">
+                <a href="users.html" class="nav-btn">👥 Users</a>
+                <a href="books.html" class="nav-btn">📖 Books</a>
+                <a href="borrowings.html" class="nav-btn">📋 Borrowings</a>
+                <a href="fines.html" class="nav-btn">💰 Fines</a>
+            </div>
+        </nav>
+
+        <div class="dashboard">
+            <div class="card">
+                <h2>📊 Quick Stats</h2>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-number">247</span>
+                        <span class="stat-label">Total Books</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">23</span>
+                        <span class="stat-label">Active Loans</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">5</span>
+                        <span class="stat-label">Overdue Items</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">156</span>
+                        <span class="stat-label">Total Users</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>📚 Recently Added Books</h2>
+                <div class="book-item">
+                    <div class="book-info">
+                        <h3>Clean Architecture</h3>
+                        <p>by Robert C. Martin</p>
+                    </div>
+                    <span class="book-status available">Available</span>
+                </div>
+                <div class="book-item">
+                    <div class="book-info">
+                        <h3>System Design Interview</h3>
+                        <p>by Alex Xu</p>
+                    </div>
+                    <span class="book-status available">Available</span>
+                </div>
+                <div class="book-item">
+                    <div class="book-info">
+                        <h3>The Pragmatic Programmer</h3>
+                        <p>by David Thomas</p>
+                    </div>
+                    <span class="book-status limited">2 copies left</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>🔥 Popular Books</h2>
+                <div class="book-item">
+                    <div class="book-info">
+                        <h3>Database System Concepts</h3>
+                        <p>by Abraham Silberschatz • 15 borrows this month</p>
+                    </div>
+                    <span class="book-status limited">1 copy left</span>
+                </div>
+                <div class="book-item">
+                    <div class="book-info">
+                        <h3>Introduction to Algorithms</h3>
+                        <p>by Thomas H. Cormen • 12 borrows this month</p>
+                    </div>
+                    <span class="book-status available">Available</span>
+                </div>
+                <div class="book-item">
+                    <div class="book-info">
+                        <h3>Clean Code</h3>
+                        <p>by Robert C. Martin • 10 borrows this month</p>
+                    </div>
+                    <span class="book-status available">Available</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>🕒 Recent Activity</h2>
+                <div class="activity-item">
+                    <div>
+                        <div class="activity-action">Book Returned</div>
+                        <div>John Smith returned "Clean Code"</div>
+                    </div>
+                    <div class="activity-time">2 hours ago</div>
+                </div>
+                <div class="activity-item">
+                    <div>
+                        <div class="activity-action">New Borrowing</div>
+                        <div>Sarah Johnson borrowed "System Design"</div>
+                    </div>
+                    <div class="activity-time">5 hours ago</div>
+                </div>
+                <div class="activity-item">
+                    <div>
+                        <div class="activity-action">Fine Paid</div>
+                        <div>Mike Brown paid $15.00 late fee</div>
+                    </div>
+                    <div class="activity-time">1 day ago</div>
+                </div>
+                <div class="activity-item">
+                    <div>
+                        <div class="activity-action">New User</div>
+                        <div>Emma Wilson registered as new member</div>
+                    </div>
+                    <div class="activity-time">2 days ago</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

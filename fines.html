@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fines - Library Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">📚 SmartLibrary</div>
+            <div class="tagline">Fines Management</div>
+        </header>
+
+        <nav class="nav-strip">
+            <div class="nav-buttons">
+                <a href="index.html" class="nav-btn">🏠 Home</a>
+                <a href="users.html" class="nav-btn">👥 Users</a>
+                <a href="books.html" class="nav-btn">📖 Books</a>
+                <a href="borrowings.html" class="nav-btn">📋 Borrowings</a>
+            </div>
+        </nav>
+
+        <div class="card">
+            <div class="page-header">
+                <h2>💰 Fines & Penalties</h2>
+                <button class="add-btn" id="addFineBtn">+ Add Fine</button>
+            </div>
+
+            <div class="filter-section">
+                <input type="text" class="search-bar" placeholder="Search by user name, fine ID, or borrowing ID...">
+                <div class="filter-buttons">
+                    <button class="filter-btn active">All</button>
+                    <button class="filter-btn">Unpaid</button>
+                    <button class="filter-btn">Paid</button>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table class="fines-table">
+                    <thead>
+                        <tr>
+                            <th>Fine ID</th>
+                            <th>User ID</th>
+                            <th>User Name</th>
+                            <th>Borrowing ID</th>
+                            <th>Fine Amount</th>
+                            <th>Reason</th>
+                            <th>Issued Date</th>
+                            <th>Paid Date</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="finesTableBody">
+                        
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+        <div class="card" style="margin-top: 20px;">
+            <h2>📊 Fine Statistics</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number">$34.00</span>
+                    <span class="stat-label">Outstanding Fines</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">$55.00</span>
+                    <span class="stat-label">Collected This Month</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">4</span>
+                    <span class="stat-label">Unpaid Fines</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">$11.13</span>
+                    <span class="stat-label">Average Fine</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fines Modal -->
+    <div id="addFineModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeAddFineModal">&times;</span>
+            <h2>Add New Fine</h2>
+            <form id="addFineForm" class="modal-form">
+
+                <div class="form-group">
+                    <label for="fineId">Fine ID *</label>
+                    <input type="text" id="fineId" name="fineId" required placeholder="e.g., F001">
+                </div>
+
+                <div class="form-group">
+                    <label for="userId">User ID *</label>
+                    <input type="text" id="userId" name="userId" required placeholder="e.g., U005">
+                </div>
+
+                <div class="form-group">
+                    <label for="userName">User Name</label>
+                    <input type="text" id="userName" name="userName" placeholder="Enter user name" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label for="borrowingId">Borrowing ID *</label>
+                    <input type="text" id="borrowingId" name="borrowingId" required placeholder="e.g., BR005">
+                </div>
+
+                <div class="form-group">
+                    <label for="fineAmount">Fine Amount *</label>
+                    <input type="number" id="fineAmount" name="fineAmount" required placeholder="Enter fine amount">
+                </div>
+
+                <div class="form-group">
+                    <label for="fineReason">Reason *</label>
+                    <input type="text" id="fineReason" name="fineReason" required placeholder="Enter reason for fine">
+                </div>
+
+                <div class="form-group">
+                    <label for="fineIssueDate">Fined Date *</label>
+                    <input type="date" id="fineIssueDate" name="fineIssueDate" required placeholder="e.g. 2024-03-01">
+                </div>
+
+                <div class="form-group">
+                    <label for="paidDate">Paid Date</label>
+                    <input type="date" id="paidDate" name="paidDate" placeholder="e.g. 2024-03-15">
+                </div>
+
+                <div class="form-group">
+                    <label for="borrowStatus">Status *</label>
+                    <select id="borrowStatus" name="borrowStatus" required>
+                        <option value="">Select status</option>
+                        <option value="unpaid">Unpaid</option>
+                        <option value="paid">Paid</option>
+                        <option value="remitted">Remitted</option>
+                    </select>
+                </div>             
+
+                <div class="form-actions">
+                    <button type="submit" class="submit-btn">Add fine</button>
+                    <button type="button" class="cancel-btn" id="cancelAddFine">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

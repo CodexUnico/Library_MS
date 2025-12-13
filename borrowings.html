@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Borrowings - Library Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">📚 SmartLibrary</div>
+            <div class="tagline">Borrowings Management</div>
+        </header>
+
+        <nav class="nav-strip">
+            <div class="nav-buttons">
+                <a href="index.html" class="nav-btn">🏠 Home</a>
+                <a href="users.html" class="nav-btn">👥 Users</a>
+                <a href="books.html" class="nav-btn">📖 Books</a>
+                <a href="fines.html" class="nav-btn">💰 Fines</a>
+            </div>
+        </nav>
+
+        <div class="card">
+            <div class="page-header">
+                <h2>📋 Borrowing Records</h2>
+                <button class="add-btn" id="issueBookBtn">+ Issue New Book</button>
+            </div>
+
+            <div class="filter-section">
+                <input type="text" class="search-bar" placeholder="Search by user name, book title, or borrowing ID...">
+                <div class="filter-buttons">
+                    <button class="filter-btn active">All</button>
+                    <button class="filter-btn">Active</button>
+                    <button class="filter-btn">Returned</button>
+                    <button class="filter-btn">Overdue</button>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table class="borrowings-table">
+                    <thead>
+                        <tr>
+                            <th>Borrowing ID</th>
+                            <th>User ID</th>
+                            <th>User Name</th>
+                            <th>Book ID</th>
+                            <th>Book Title</th>
+                            <th>Borrowed Date</th>
+                            <th>Due Date</th>
+                            <th>Returned Date</th>
+                            <th>Status</th>
+                            <th>Fine Amount</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="borrowingsTableBody">
+                        
+                    </tbody>
+                </table>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- Borrowing Modal -->
+    <div id="issueBookModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeIssueBookModal">&times;</span>
+            <h2>Issue New Book</h2>
+            <form id="issueBookForm" class="modal-form">
+
+                <div class="form-group">
+                    <label for="borrowingId">Borrowing ID *</label>
+                    <input type="text" id="borrowingId" name="borrowingId" required placeholder="e.g., BR005">
+                </div>
+
+                <div class="form-group">
+                    <label for="userId">User ID *</label>
+                    <input type="text" id="userId" name="userId" required placeholder="e.g., U005">
+                </div>
+                
+                <div class="form-group">
+                    <label for="userName">User Name *</label>
+                    <input type="text" id="userName" name="userName" placeholder="Enter user name">
+                </div>
+
+                <div class="form-group">
+                    <label for="bookId">Book ID *</label>
+                    <input type="text" id="bookId" name="bookId" required placeholder="e.g., B005">
+                </div>
+
+                <div class="form-group">
+                    <label for="bookTitle">Book Title *</label>
+                    <input type="text" id="bookTitle" name="bookTitle" placeholder="Enter book title">
+                </div>
+
+                <div class="form-group">
+                    <label for="borrowedDate">Borrowed Date *</label>
+                    <input type="date" id="borrowedDate" name="borrowedDate" required placeholder="e.g. 2024-03-01">
+                </div>
+
+                <div class="form-group">        
+                    <label for="dueDate">Due Date *</label>
+                    <input type="date" id="dueDate" name="dueDate" required placeholder="e.g. 2024-03-15">
+                </div>
+
+                <div class="form-group">
+                    <label for="returnDate">Return Date</label>
+                    <input type="date" id="returnDate" name="returnDate" placeholder="e.g. 2024-03-22">
+                </div>
+
+                <div class="form-group">
+                    <label for="borrowStatus">Status *</label>
+                    <select id="borrowStatus" name="borrowStatus" required>
+                        <option value="">Select status</option>
+                        <option value="active">Active</option>
+                        <option value="returned">Returned</option>
+                        <option value="overdue">Overdue</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="fine">Fine Amount</label>
+                    <input type="number" id="fine" name="fine" placeholder="Enter fine amount">
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="submit-btn">Issue Book</button>
+                    <button type="button" class="cancel-btn" id="cancelIssueBook">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

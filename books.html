@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books - Library Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">📚 SmartLibrary</div>
+            <div class="tagline">Books Management</div>
+        </header>
+
+        <nav class="nav-strip">
+            <div class="nav-buttons">
+                <a href="index.html" class="nav-btn">🏠 Home</a>
+                <a href="users.html" class="nav-btn">👥 Users</a>
+                <a href="borrowings.html" class="nav-btn">📋 Borrowings</a>
+                <a href="fines.html" class="nav-btn">💰 Fines</a>
+            </div>
+        </nav>
+
+        <div class="card">
+            <div class="page-header">
+                <h2>📖 Books Inventory</h2>
+                <button class="add-btn" id="addBookBtn">+ Add New Book</button>
+            </div>
+
+            <input type="text" class="search-bar" placeholder="Search books by title, author, or genre...">
+
+            <div class="table-container">
+                <table class="books-table">
+                    <thead>
+                        <tr>
+                            <th>Book ID</th>
+                            <th>Title</th>
+                            <th>Author</th>
+                            <th>Genre</th>
+                            <th>Year</th>
+                            <th>Total Copies</th>
+                            <th>Available</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="booksTableBody">
+                        <!-- Book rows will be dynamically inserted here -->
+                    </tbody>
+                </table>
+            </div>
+            
+        </div>
+    </div>
+
+        <!-- Add Book Modal -->
+    <div id="addBookModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeAddBookModal">&times;</span>
+            <h2>Add New Book</h2>
+            <form id="addBookForm" class="modal-form">
+                <div class="form-group">
+                    <label for="bookId">Book ID *</label>
+                    <input type="text" id="bookId" name="bookId" required placeholder="e.g., B005">
+                </div>
+
+                <div class="form-group">
+                    <label for="bookTitle">Book Title *</label>
+                    <input type="text" id="bookTitle" name="bookTitle" required placeholder="Enter book title">
+                </div>
+
+                <div class="form-group">
+                    <label for="author">Author Name *</label>
+                    <input type="text" id="author" name="author" required placeholder="Enter author name">
+                </div>
+
+                <div class="form-group">
+                    <label for="genre">Genre *</label>
+                    <input type="text" id="genre" name="genre" required placeholder="e.g. Programming, fiction, romance, ...">
+                </div>
+
+                <div class="form-group">        
+                    <label for="pubYear">Year published *</label>
+                    <input type="number" id="pubYear" name="pubYear" required placeholder="e.g. 2020">
+                </div>
+
+                <div class="form-group">
+                    <label for="copiesTotal">Total Copies *</label>
+                    <input type="number" id="copiesTotal" name="copiesTotal" required placeholder="Enter total copies">
+                </div>
+
+                <div class="form-group">
+                    <label for="copiesAvailable">Copies Available *</label>
+                    <input type="number" id="copiesAvailable" name="copiesAvailable" required placeholder="Enter available copies">
+                </div>
+
+                <div class="form-group">
+                    <label for="bookStatus">Status *</label>
+                    <select id="bookStatus" name="bookStatus" required>
+                        <option value="">Select status</option>
+                        <option value="available">Available</option>
+                        <option value="limited">Limited</option>
+                        <option value="unavailable">Unavailable</option>
+                    </select>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="submit-btn">Add Book</button>
+                    <button type="button" class="cancel-btn" id="cancelAddBook">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
