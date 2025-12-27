@@ -11,8 +11,7 @@ const userRowTemplate = (user) => `
         <td>${user.registration_date}</td>
         <td><span class="status ${user.status.toLowerCase()}">${user.status}</span></td>
         <td>
-            <button class="edit-btn">Edit</button>
-            <button class="delete-btn">Delete</button>
+            <button class="edit-btn" onclick="editUser('${user.user_id}')">Edit</button>
         </td>
     </tr>
 `;
@@ -27,9 +26,8 @@ const bookRowTemplate = (book) => `
         <td>${book.copies_total}</td>
         <td>${book.copies_available}</td>
         <td>Status</td>
-        <td>
-            <button class="edit-btn">Edit</button>
-            <button class="delete-btn">Delete</button>
+         <td>
+            <button class="edit-btn" onclick="editBook('${book.book_id}')">Edit</button>
         </td>
     </tr>
 `;
@@ -44,10 +42,11 @@ const borrowingRowTemplate = (borrowing) => `
         <td>${borrowing.borrowed_date}</td>
         <td>${borrowing.due_date}</td>
         <td>${borrowing.returned_date || '-'}</td>
-        <td><span class="status-badge ${borrowing.status.toLowerCase()}">${borrowing.status}</span></td>
+        <td><span class="status-badge ${(borrowing.status ?? '').toLowerCase()}"> ${borrowing.status}</span></td>
         <td>$${borrowing.fine_amount || '0.00'}</td>
-        <td>
-            <button class="view-btn">View</button>
+       <td>
+            ${borrowing.status != 'returned' ? 
+                `<button class="action-btn" onclick="returnBook('${borrowing.borrowing_id}')">Return Book</button>` : ''} 
         </td>
     </tr>
 `;
@@ -64,7 +63,9 @@ const fineRowTemplate = (fine) => `
         <td>${fine.paid_date || '-'}</td>
         <td><span class="status-badge ${fine.status}">${fine.status}</span></td>
         <td>
-            <button class="view-btn">View Receipt</button>
+            ${(fine.status == 'unpaid' || !fine.status) ? 
+                `<button class="action-btn" onclick="finePaid('${fine.fine_id}')">Mark as Paid</button>` : ''
+            }
         </td>
     </tr>
 `;
@@ -112,8 +113,8 @@ async function fetchData(routeEP){
     }
 }
 
-async function displayTableData(routeEP, tableId, rowTemplate, sortKey = null){
-    const tbody = document.getElementById(tableId);
+async function displayTableData(routeEP, tbodyId, rowTemplate, sortKey = null){
+    const tbody = document.getElementById(tbodyId);
     if(!tbody) return;
 
     tbody.innerHTML = ''; // Clear existing data
@@ -139,10 +140,10 @@ function closeModal(modal) {
     modal.style.display = 'none';
 }
 
-
+//------------Data Display (read operations)----------------
 // Display data based on page
 if(document.getElementById('usersTableBody')){
-    displayTableData("/users", 'usersTableBody', userRowTemplate, "`name")
+    displayTableData("/users", 'usersTableBody', userRowTemplate, "name")
 }
 if(document.getElementById('booksTableBody')){
     displayTableData("/books", 'booksTableBody', bookRowTemplate, "title")
@@ -155,7 +156,45 @@ if(document.getElementById('finesTableBody')){
 }
 
 
-//------------Modal Handling----------------
+//------------Update/edit & delete operations----------------
+
+
+//return book
+async function returnBook(borrowingId){
+    try{
+        response = await fetch(`${BASE_URL}/borrowings/return/${borrowingId}`,
+            {method: 'PUT'}
+        );
+        const result = await response.json();
+        console.log(result.message);
+
+        // Refresh borrowings table
+        displayTableData("/borrowings", 'borrowingsTableBody', borrowingRowTemplate);
+    } catch (err){
+        console.error(`Error occured while returning ${borrowingId}:`, err)
+    }
+}
+
+//Pay fine
+async function finePaid(fineId){
+    try{
+        response = await fetch(`${BASE_URL}/fines/pay/${fineId}`,
+            {method: 'PUT'}
+        );
+
+        const result = await response.json();
+        console.log(result.message);
+
+        // Refresh fines table
+        displayTableData("/fines", 'finesTableBody', fineRowTemplate, "fine_amount");
+
+    } catch (err){
+        console.error(`Error occured while marking ${fineId}:`, err)
+    }
+}
+
+
+//------------Modal Handling (create operations)----------------
 // Get userModal elements
 const userModal = document.getElementById('addUserModal');
 const userForm = document.getElementById('addUserForm');
@@ -210,7 +249,7 @@ if (userModal && openUFbtn && userForm) {
 
         closeModal(userModal);
         userForm.reset();
-        displayTableData("/users", 'userTableBody', userRowTemplate)
+        displayTableData("/users", 'usersTableBody', userRowTemplate)
     }
 }
 // Get bookModal elements
@@ -263,7 +302,7 @@ if (openBFbtn && bookModal && bookForm) {
 
         closeModal(bookModal);
         bookForm.reset();
-        displayTableData("/books", 'bookTableBody', bookRowTemplate)
+        displayTableData("/books", 'booksTableBody', bookRowTemplate)
     }
 
 }
@@ -318,7 +357,7 @@ if (openIBbtn && issueModal) {
 
         closeModal(issueModal);
         issueForm.reset();
-        displayTableData("/borrowings", 'borrowingTableBody', borrowingRowTemplate)
+        displayTableData("/borrowings", 'borrowingsTableBody', borrowingRowTemplate)
     }
 }
 
@@ -370,7 +409,7 @@ if (openAFbtn && fineModal) {
 
         closeModal(fineModal);
         fineForm.reset();
-        displayTableData("/fines", 'fineTableBody', fineRowTemplate)
+        displayTableData("/fines", 'finesTableBody', fineRowTemplate)
     }
 
 }

@@ -50,6 +50,17 @@ def add_user():
 
     return jsonify({"message": "User added successfully"})
 
+# Delete User
+@app.route("/users/delete/<user_id>", methods=["DELETE"])
+def delete_user(user_id):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM users WHERE user_id = %s", (user_id,))
+    cursor.commit()
+    cursor.close()
+    conn.close()
+    return jsonify({"message": "User deleted"})
+
 # --------------Books Endpoint
 @app.route("/books", methods=["GET"])
 def get_books():
@@ -92,7 +103,7 @@ def add_book():
 
 
 
-#---------Borrowings
+#---------Borrowings endpoint------------------
 @app.route("/borrowings", methods = ["GET"])
 def get_borowings():
     conn = get_db_connection()
@@ -139,7 +150,22 @@ def add_borrowings():
     return jsonify({"message": "borrowing added successfuly"})
 
 
-#---------Fines
+@app.route("/borrowings/return/<borrowing_id>", methods=["PUT"])
+def return_book(borrowing_id):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    try:
+        cursor.execute("UPDATE borrowings SET returned_date = NOW(), status = 'returned' WHERE borrowing_id = %s", (borrowing_id,))
+        conn.commit()
+        return jsonify({"message": "Book returned successfully"}), 200
+    except Exception as e:
+        conn.rollback()  # Rollback on error
+        return jsonify({"error": str(e)}), 500
+    finally:
+        cursor.close()  # Always close
+        conn.close()
+
+#---------Fines------------------
 @app.route("/fines", methods= ["GET"])
 def get_fines():
     conn = get_db_connection()
@@ -177,13 +203,31 @@ def add_fines():
         )
 
     except Exception as e:
-        conn.rollback()  # ✅ Rollback on error
+        conn.rollback()  # Rollback on error
         return jsonify({"error": str(e)}), 500
     finally:
-        cursor.close()  # ✅ Always close
+        cursor.close()  # Always close
         conn.close()
 
     return jsonify({"message": "fine added successfully"})
+
+@app.route("/fines/pay/<fine_id>", methods=["PUT"])
+def pay_fine(fine_id):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    try:
+        cursor.execute("UPDATE fines SET status = 'paid', paid_date = NOW() WHERE fine_id = %s", (fine_id,))
+
+        conn.commit()
+        return jsonify({"message": "Fine %s marked paid" % fine_id}), 200
+    except Exception as e:
+        conn.rollback()  # Rollback on error
+        return jsonify({"error": str(e)}), 500
+    finally:
+        cursor.close()  # Always close
+        conn.close()
+
+
 
 
 
