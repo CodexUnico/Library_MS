@@ -6,12 +6,13 @@ M Yousaf Khan B24F0609CS122
 
 Sadia Bibi B24F1314CS134
 
-**Library Management System**
+
+# **Library Management System**
 
 This project is a demo library management website. Users, books can be added to DB. Books can be issued, fines can be imposed.
 
 
-##**Visuals:**
+## **Visuals:**
 
 
 <img width="1593" height="855" alt="image" src="https://github.com/user-attachments/assets/1d9f8a9b-62c0-466f-a59f-1ac774904f66" />
